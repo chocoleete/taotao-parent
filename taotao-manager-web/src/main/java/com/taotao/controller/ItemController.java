@@ -30,6 +30,12 @@ public class ItemController {
         return result;
     }
 
+    /**
+     * 添加item
+     * @param tbItem
+     * @param desc
+     * @return
+     */
     @RequestMapping(value = "/item/save")
     @ResponseBody
     public TaotaoResult addItem(TbItem tbItem, String desc) {
