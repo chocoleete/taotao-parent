@@ -13,7 +13,12 @@
     <artifactId>taotao-manager-web</artifactId>
     <packaging>war</packaging>
     <dependencies>
-        <!--添加taotao-manager-interface的依赖-->
+        <!--添加taotao-common-->
+        <dependency>
+            <groupId>com.taotao</groupId>
+            <artifactId>taotao-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency><!--添加taotao-manager-interface的依赖-->
         <dependency>
             <groupId>com.taotao</groupId>
             <artifactId>taotao-manager-interface</artifactId>
@@ -23,6 +28,12 @@
         <dependency>
             <groupId>com.taotao</groupId>
             <artifactId>taotao-content-interface</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!--添加taotao-search-interface-->
+        <dependency>
+            <groupId>com.taotao</groupId>
+            <artifactId>taotao-search-interface</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <!-- Spring -->
@@ -108,6 +119,16 @@
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.taotao</groupId>
+            <artifactId>taotao-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.taotao</groupId>
+            <artifactId>taotao-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

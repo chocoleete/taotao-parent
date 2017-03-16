@@ -19,7 +19,7 @@ import java.util.List;
  * Created by lee on 2017/3/16.
  */
 @SuppressWarnings(value = "all")
-@Service(value = "SearchItemServiceImpl")
+@Service(value = "searchItemServiceImpl")
 public class SearchItemServiceImpl implements SearchItemService {
     //注入solrService对象
     @Resource(name = "httpSolrServer")
@@ -44,7 +44,7 @@ public class SearchItemServiceImpl implements SearchItemService {
             document.addField("item_price", SearchItem.getPrice());
             document.addField("item_image", SearchItem.getImage());
             document.addField("item_category_name", SearchItem.getCategory_name());
-            document.addField("item_item_desc", SearchItem.getItem_desc());
+            document.addField("item_desc", SearchItem.getItem_desc());
             //5.向索引库中添加文档
             solrServer.add(document);
         }
