@@ -8,17 +8,17 @@
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
 
     <!--单机版-->
-    <!--<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
-        &lt;!&ndash;使用构造方法创建对象，需要传入两个参数&ndash;&gt;
+    <bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+        <!--使用构造方法创建对象，需要传入两个参数-->
         <constructor-arg name="host" value="192.168.25.129"/>
         <constructor-arg name="port" value="6379"/>
     </bean>
-    &lt;!&ndash;连接池&ndash;&gt;
-    <bean id="jedisClientPool" class="com.taotao.content.jedis.JedisClientPool"/>-->
+    <!--连接池-->
+    <bean id="jedisClientPool" class="com.taotao.content.jedis.JedisClientPool"/>
 
     <!--集群版与单机版只能用一个-->
     <!--jedisCluster对象，是JedisClientCluster类中的成员变量-->
-    <bean id="jedisCluster" class="redis.clients.jedis.JedisCluster">
+    <!--<bean id="jedisCluster" class="redis.clients.jedis.JedisCluster">
         <constructor-arg name="nodes">
             <set>
                 <bean class="redis.clients.jedis.HostAndPort">
@@ -48,7 +48,7 @@
             </set>
         </constructor-arg>
     </bean>
-    <!--jedisClientCluster对象-->
-    <bean id="jedisClientCluster" class="com.taotao.content.jedis.JedisClientCluster"/>
+    &lt;!&ndash;jedisClientCluster对象&ndash;&gt;
+    <bean id="jedisClientCluster" class="com.taotao.content.jedis.JedisClientCluster"/>-->
 
 </beans>
