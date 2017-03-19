@@ -15,11 +15,12 @@ import java.util.List;
  * Created by lee on 2017/3/11.
  */
 @SuppressWarnings(value = "all")
-@Service
+@Service(value = "itemCatServiceImpl")
 public class ItemCatServiceImpl implements ItemCatService {
     //注入itemCatMapper
     @Autowired
     private TbItemCatMapper itemCatMapper;
+
     @Override
     public List<EasyUITreeNode> getItemCatList(long parentId) {
         //1.根据parentId查询节点列表

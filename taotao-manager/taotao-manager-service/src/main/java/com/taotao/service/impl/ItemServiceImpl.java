@@ -21,7 +21,7 @@ import java.util.List;
  * Created by lee on 2017/3/10.
  */
 @SuppressWarnings(value = "all")
-@Service
+@Service(value = "itemServiceImpl")
 public class ItemServiceImpl implements ItemService {
     //注入itemMapper
     @Autowired

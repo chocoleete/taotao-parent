@@ -69,4 +69,12 @@ public class SearchItem implements Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public String[] getImages() {
+        if (image != null && !"".equals(image)) {
+            String[] split = image.split(",");
+            return split;
+        }
+        return null;
+    }
 }

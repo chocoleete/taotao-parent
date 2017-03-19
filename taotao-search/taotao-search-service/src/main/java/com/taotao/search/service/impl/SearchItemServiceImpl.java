@@ -22,7 +22,8 @@ import java.util.List;
 @Service(value = "searchItemServiceImpl")
 public class SearchItemServiceImpl implements SearchItemService {
     //注入solrService对象
-    @Resource(name = "httpSolrServer")
+    @Resource(name = "httpSolrServer")//单机版注入
+    //@Resource(name = "cloudSolrServer")//集群版注入
     private SolrServer solrServer;
 
     //注入itemMapper对象

@@ -23,7 +23,8 @@ import java.util.Map;
 @Repository(value = "itemSearchDao")
 public class ItemSearchDao {
     //注入solrServer
-    @Resource(name = "httpSolrServer")
+    @Resource(name = "httpSolrServer")//单机版注入
+    //@Resource(name = "cloudSolrServer")//集群版注入
     private SolrServer solrServer;
 
     /**
@@ -42,7 +43,7 @@ public class ItemSearchDao {
         List<SearchItem> itemList = new ArrayList<>();
         for (SolrDocument solrDocument : solrDocumentList) {
             SearchItem searchItem = new SearchItem();
-            searchItem.setId((Long) solrDocument.get("id"));
+            searchItem.setId(Long.parseLong((String)solrDocument.get("id")));
             //取高亮显示
             String itemTitle = null;
             Map<String, Map<String, List<String>>> highlighting = queryResponse.getHighlighting();
