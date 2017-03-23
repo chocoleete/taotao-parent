@@ -35,17 +35,17 @@ public class SearchItemServiceImpl implements SearchItemService {
         //1.查询所有商品数据
         List<SearchItem> itemList = itemMapper.getItemList();
         //2.创建一个solrServer对象
-        for (SearchItem SearchItem : itemList) {
+        for (SearchItem searchItem : itemList) {
             //3.创建一个solrInputDocument对象
             SolrInputDocument document = new SolrInputDocument();
             //4.为文档添加域
-            document.addField("id", SearchItem.getId());
-            document.addField("item_title",SearchItem.getTitle());
-            document.addField("item_sell_point", SearchItem.getSell_point());
-            document.addField("item_price", SearchItem.getPrice());
-            document.addField("item_image", SearchItem.getImage());
-            document.addField("item_category_name", SearchItem.getCategory_name());
-            document.addField("item_desc", SearchItem.getItem_desc());
+            document.addField("id", searchItem.getId());
+            document.addField("item_title",searchItem.getTitle());
+            document.addField("item_sell_point", searchItem.getSell_point());
+            document.addField("item_price", searchItem.getPrice());
+            document.addField("item_image", searchItem.getImage());
+            document.addField("item_category_name", searchItem.getCategory_name());
+            document.addField("item_desc", searchItem.getItem_desc());
             //5.向索引库中添加文档
             solrServer.add(document);
         }

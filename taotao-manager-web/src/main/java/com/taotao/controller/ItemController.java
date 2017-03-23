@@ -20,6 +20,7 @@ public class ItemController {
     //注入itemService
     @Resource(name = "itemService")
     private ItemService itemService;
+
     /**
      * 实现商品列表的查询
      */

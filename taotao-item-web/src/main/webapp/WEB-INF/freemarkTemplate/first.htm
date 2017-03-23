@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
+    <title>${title}</title>
+</head>
+<body>
+    学生姓名：${stu.name}
+    <br>
+    <table border="1">
+        <tr>
+            <th>角标</th>
+            <th>ID</th>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>住址</th>
+        </tr>
+        <!--遍历-->
+        <#list studentList as student>
+            <!--条件判断-->
+            <#if student_index%2==0>
+                <tr bgcolor=#7fff00>
+            <#else/>
+                <tr bgcolor=red>
+            </#if>
+                <td>${student_index}</td>
+                <td>${student.id}</td>
+                <td>${student.name}</td>
+                <td>${student.age}</td>
+                <td>${student.address}</td>
+            </tr>
+        </#list>
+    </table>
+<br>
+    当前日期:${date?date}
+<br>
+    当前时间:${date?time}
+<br>
+    当前日期和时间:${date?datetime}
+<br>
+    自定义日期格式:${date?string("yyyy年MM月dd日 HH时mm分ss秒")}
+<br>
+    null的测试:${myTest!"默认值"}
+<br>
+    null的判断:<#if myTest??>
+        null值不为空。
+        <#else/>
+        null值为空
+    </#if>
+</body>
+</html>
