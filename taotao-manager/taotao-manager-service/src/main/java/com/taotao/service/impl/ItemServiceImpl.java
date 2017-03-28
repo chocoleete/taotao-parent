@@ -56,11 +56,11 @@ public class ItemServiceImpl implements ItemService {
     private JedisClient jedisClient;
 
     //取值
-    @Value(value = "REDIS_ITEM_KEY")
+    @Value(value = "${REDIS_ITEM_KEY}")
     private String REDIS_ITEM_KEY;
 
-    @Value(value = "REDIS_ITEM_EXPIRE")
-    private String REDIS_ITEM_EXPIRE;
+    @Value(value = "${REDIS_ITEM_EXPIRE}")
+    private Integer REDIS_ITEM_EXPIRE;
 
     /**
      * 展示商品
@@ -153,7 +153,7 @@ public class ItemServiceImpl implements ItemService {
         try {
             jedisClient.set(REDIS_ITEM_KEY + ":" + itemId + ":BASE", JsonUtils.objectToJson(item));
             //设置过期时间
-            jedisClient.expire(REDIS_ITEM_KEY + ":" + itemId + ":BASE", Integer.parseInt(REDIS_ITEM_EXPIRE));
+            jedisClient.expire(REDIS_ITEM_KEY + ":" + itemId + ":BASE", REDIS_ITEM_EXPIRE);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -187,7 +187,7 @@ public class ItemServiceImpl implements ItemService {
         try {
             jedisClient.set(REDIS_ITEM_KEY + ":" + itemId + ":DESC", JsonUtils.objectToJson(itemDesc));
             //设置过期时间
-            jedisClient.expire(REDIS_ITEM_KEY + ":" + itemId + ":DESC", Integer.parseInt(REDIS_ITEM_EXPIRE));
+            jedisClient.expire(REDIS_ITEM_KEY + ":" + itemId + ":DESC", REDIS_ITEM_EXPIRE);
         } catch (Exception e) {
             e.printStackTrace();
         }

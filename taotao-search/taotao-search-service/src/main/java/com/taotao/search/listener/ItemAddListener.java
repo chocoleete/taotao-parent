@@ -30,11 +30,11 @@ public class ItemAddListener implements MessageListener {
     @Override
     public void onMessage(Message message) {
         try {
+            //System.out.println("看到这个表示监听器工作了");
             //从消息中取商品id
             TextMessage textMessage = (TextMessage) message;
             String strItemId = textMessage.getText();
             Long itemId = Long.parseLong(strItemId);
-            System.out.println("看到这个表示监听器工作了");
             //根据商品ID查询商品消息
             SearchItem searchItem = itemMapper.getItemById(itemId);
             //把商品信息添加到索引库

@@ -4,13 +4,8 @@ import com.taotao.content.jedis.JedisClient;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisCluster;
 import redis.clients.jedis.JedisPool;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by lee on 2017/3/14.
@@ -44,7 +39,7 @@ public class JedisTest {
     }
 
     //测试集群的用法
-    @Test
+    /*@Test
     public void testJedisCluster() {
         //连接集群使用JedisCluster对象
         Set<HostAndPort> nodes=new HashSet<>();
@@ -61,7 +56,7 @@ public class JedisTest {
         System.out.printf(result);
         //系统结束前关闭jedisCluster对象
         jedisCluster.close();
-    }
+    }*/
 
     //测试
     @Test

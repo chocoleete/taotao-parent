@@ -35,7 +35,7 @@ public class HtmlGenListener implements MessageListener {
     private FreeMarkerConfigurer freeMarkerConfigurer;
 
     //取配置文件中的值
-    @Value(value = "HTML_OUT_PATH")
+    @Value(value = "${HTML_OUT_PATH}")
     private String HTML_OUT_PATH;
 
     @Override
@@ -59,7 +59,7 @@ public class HtmlGenListener implements MessageListener {
             //5.	指定商品详情页面的输出目录
             Configuration configuration = freeMarkerConfigurer.getConfiguration();
             Template template = configuration.getTemplate("item.htm");
-            File fileOutPath = new File(HTML_OUT_PATH+ + itemId + ".html");
+            File fileOutPath = new File(HTML_OUT_PATH + itemId + ".html");
             FileWriter out = new FileWriter(fileOutPath);
             //6.	生成静态页面
             template.process(data, out);
