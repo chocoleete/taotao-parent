@@ -1,6 +1,7 @@
 package com.taotao.sso.service;
 
 import com.taotao.commom.pojo.TaotaoResult;
+import com.taotao.pojo.TbUser;
 
 /**
  * Created by lee on 2017/3/26.
@@ -8,11 +9,17 @@ import com.taotao.commom.pojo.TaotaoResult;
 @SuppressWarnings(value = "all")
 public interface UserRegisterService {
     /**
-     * 参数列表：(String parm,Integer type)
-     * 返回值类型：TaotaoResult
+     * 用户数据校验
      * @param parm
      * @param type
-     * @return
+     * @return TaotaoResult
      */
     TaotaoResult checkUserInfo(String parm,Integer type);
+
+    /**
+     * 用户注册
+     * @param user
+     * @return TaotaoResult
+     */
+    TaotaoResult createUser(TbUser user);
 }
