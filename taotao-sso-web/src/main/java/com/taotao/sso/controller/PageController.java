@@ -1,6 +1,7 @@
 package com.taotao.sso.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -16,7 +17,9 @@ public class PageController {
     }
 
     @RequestMapping(value = "/page/login")
-    public String showLogin() {
+    public String showLogin(String redirect,Model model) {
+        //将redirect传递到页面
+        model.addAttribute("redirect", redirect);
         return "login";
     }
 }
