@@ -41,29 +41,28 @@ public class HtmlGenListener implements MessageListener {
     @Override
     public void onMessage(Message message) {
         try {
-            //1.	创建MessageListener接口的实现类
-            //2.	从messag中获取商品id
+            // 1.创建MessageListener接口的实现类
+            // 2.从messag中获取商品id
             TextMessage textMessage = (TextMessage) message;
             String strItemId = textMessage.getText();
             Long itemId = Long.parseLong(strItemId);
-            //3.	根据id查询商品基本信息和商品描述信息
+            // 3.根据id查询商品基本信息和商品描述信息
             TbItem tbItem = itemService.getItemById(itemId);
             Item item = new Item(tbItem);
             TbItemDesc tbItemDesc = itemService.getItemDescById(itemId);
-            //创建数据集
+            // 创建数据集
             Map data = new HashMap<>();
             data.put("item", item);
             data.put("itemDesc", tbItemDesc);
-            //4.	创建商品详情页面模板
-
-            //5.	指定商品详情页面的输出目录
+            // 4.创建商品详情页面模板
             Configuration configuration = freeMarkerConfigurer.getConfiguration();
             Template template = configuration.getTemplate("item.htm");
+            // 5.指定商品详情页面的输出目录
             File fileOutPath = new File(HTML_OUT_PATH + itemId + ".html");
             FileWriter out = new FileWriter(fileOutPath);
-            //6.	生成静态页面
+            //6.生成静态页面
             template.process(data, out);
-            //7.	关闭流
+            //7.关闭流
             out.close();
         } catch (JMSException e) {
             e.printStackTrace();

@@ -9,7 +9,7 @@
 	            <td>商品类目:</td>
 	            <td>
 	            	<a href="javascript:void(0)" class="easyui-linkbutton selectItemCat">选择类目</a>
-	            	<input type="hidden" name="cid" style="width: 280px;"></input>
+	            	<input type="hidden" name="cid" style="width: 280px;">隐藏的</input>
 	            </td>
 	        </tr>
 	        <tr>
@@ -65,11 +65,11 @@
 </div>
 <script type="text/javascript">
 	var itemAddEditor ;
-	//页面初始化完毕后执行此方法
+	// 页面初始化完毕后执行此方法
 	$(function(){
-		//创建富文本编辑器
+		// 创建富文本编辑器
 		itemAddEditor = TAOTAO.createEditor("#itemAddForm [name=desc]");
-		//初始化类目选择和图片上传器
+		// 初始化类目选择和图片上传器
 		TAOTAO.init({fun:function(node){
 			//根据商品的分类id取商品 的规格模板，生成规格信息。第四天内容。
 			//TAOTAO.changeItemParam(node, "itemAddForm");

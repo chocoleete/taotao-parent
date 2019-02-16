@@ -22,12 +22,13 @@ public class ItemCatController {
 
     /**
      * 将查询到的节点显示到页面
+     *
      * @param parentId
      * @return
      */
     @RequestMapping(value = "/item/cat/list")
     @ResponseBody
-    public List<EasyUITreeNode> getItemCatList(@RequestParam(value = "id",defaultValue = "0")Long parentId) {
+    public List<EasyUITreeNode> getItemCatList(@RequestParam(value = "id", defaultValue = "0") Long parentId) {
         List<EasyUITreeNode> list = itemCatService.getItemCatList(parentId);
         return list;
     }

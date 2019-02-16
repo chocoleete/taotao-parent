@@ -44,14 +44,14 @@ public class FreemarkTest {
         dataMap.put("stu", new Student(1,"小明",21,"武汉"));
         List<Student> studentList = new ArrayList<>();
         studentList.add(new Student(1, "小明", 21, "武汉"));
-        studentList.add(new Student(2, "小明", 22, "武汉"));
-        studentList.add(new Student(3, "小明", 23, "武汉"));
-        studentList.add(new Student(4, "小明", 24, "武汉"));
-        studentList.add(new Student(5, "小明", 25, "武汉"));
-        studentList.add(new Student(6, "小明", 26, "武汉"));
-        studentList.add(new Student(7, "小明", 27, "武汉"));
-        studentList.add(new Student(8, "小明", 28, "武汉"));
-        studentList.add(new Student(9, "小明", 29, "武汉"));
+        studentList.add(new Student(2, "小末", 22, "武汉"));
+        studentList.add(new Student(3, "小美", 23, "武汉"));
+        studentList.add(new Student(4, "小宇", 24, "武汉"));
+        studentList.add(new Student(5, "小翼", 25, "武汉"));
+        studentList.add(new Student(6, "小云", 26, "武汉"));
+        studentList.add(new Student(7, "小花", 27, "武汉"));
+        studentList.add(new Student(8, "小何", 28, "武汉"));
+        studentList.add(new Student(9, "小宙", 29, "武汉"));
         dataMap.put("studentList", studentList);
 
         dataMap.put("date", new Date());

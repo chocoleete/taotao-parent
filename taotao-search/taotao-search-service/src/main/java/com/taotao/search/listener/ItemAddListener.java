@@ -25,21 +25,22 @@ public class ItemAddListener implements MessageListener {
 
     //注入solrServer
     @Resource(name = "httpSolrServer")
+    //@Resource(name = "cloudSolrServer")
     private SolrServer solrServer;
 
     @Override
     public void onMessage(Message message) {
         try {
             //System.out.println("看到这个表示监听器工作了");
-            //从消息中取商品id
+            // 从消息中取商品id
             TextMessage textMessage = (TextMessage) message;
             String strItemId = textMessage.getText();
             Long itemId = Long.parseLong(strItemId);
-            //根据商品ID查询商品消息
+            // 根据商品ID查询商品消息
             SearchItem searchItem = itemMapper.getItemById(itemId);
-            //把商品信息添加到索引库
+            // 把商品信息添加到索引库
             SolrInputDocument document = new SolrInputDocument();
-            //为文档添加域
+            // 为文档添加域
             document.addField("id", searchItem.getId());
             document.addField("item_title",searchItem.getTitle());
             document.addField("item_sell_point", searchItem.getSell_point());
@@ -47,10 +48,10 @@ public class ItemAddListener implements MessageListener {
             document.addField("item_image", searchItem.getImage());
             document.addField("item_category_name", searchItem.getCategory_name());
             document.addField("item_desc", searchItem.getItem_desc());
-            //5.向索引库中添加文档
+            // 5.向索引库中添加文档
             solrServer.add(document);
             solrServer.commit();
-            //最后配置到spring容器中
+            // 最后配置到spring容器中
         } catch (JMSException e) {
             e.printStackTrace();
         } catch (IOException e) {

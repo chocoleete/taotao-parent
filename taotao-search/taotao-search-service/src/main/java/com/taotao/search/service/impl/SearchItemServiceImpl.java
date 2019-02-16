@@ -21,37 +21,44 @@ import java.util.List;
 @SuppressWarnings(value = "all")
 @Service(value = "searchItemServiceImpl")
 public class SearchItemServiceImpl implements SearchItemService {
-    //注入solrService对象
+    // 注入solrService对象
     @Resource(name = "httpSolrServer")//单机版注入
     //@Resource(name = "cloudSolrServer")//集群版注入
     private SolrServer solrServer;
 
-    //注入itemMapper对象
+    // 注入itemMapper对象
     @Autowired
     private ItemMapper itemMapper;
 
+    /**
+     * 导入所有商品数据
+     * @return TaotaoResult
+     * @throws IOException
+     * @throws SolrServerException
+     */
     @Override
     public TaotaoResult importAllItemToIndex() throws IOException, SolrServerException {
-        //1.查询所有商品数据
+        // 1.查询所有商品数据
         List<SearchItem> itemList = itemMapper.getItemList();
-        //2.创建一个solrServer对象
+        // 2.创建一个solrServer对象，已注入
         for (SearchItem searchItem : itemList) {
-            //3.创建一个solrInputDocument对象
+            // 3.创建一个solrInputDocument对象
             SolrInputDocument document = new SolrInputDocument();
-            //4.为文档添加域
+            // 4.为文档添加域
             document.addField("id", searchItem.getId());
-            document.addField("item_title",searchItem.getTitle());
+
+            document.addField("item_title", searchItem.getTitle());
             document.addField("item_sell_point", searchItem.getSell_point());
             document.addField("item_price", searchItem.getPrice());
             document.addField("item_image", searchItem.getImage());
             document.addField("item_category_name", searchItem.getCategory_name());
             document.addField("item_desc", searchItem.getItem_desc());
-            //5.向索引库中添加文档
+            // 5.向索引库中添加文档
             solrServer.add(document);
         }
-        //提交
+        // 提交
         solrServer.commit();
-        //6.返回TaotaoResult,前往applicationContext-service.xml中发布服务
+        // 6.返回TaotaoResult,前往applicationContext-service.xml中发布服务
         return TaotaoResult.ok();
     }
 }

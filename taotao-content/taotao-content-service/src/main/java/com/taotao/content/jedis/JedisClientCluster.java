@@ -5,7 +5,7 @@ import redis.clients.jedis.JedisCluster;
 import javax.annotation.Resource;
 
 public class JedisClientCluster implements JedisClient {
-	
+
 	@Resource(name = "jedisCluster")
 	private JedisCluster jedisCluster;
 

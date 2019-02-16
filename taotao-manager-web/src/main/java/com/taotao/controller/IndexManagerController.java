@@ -23,8 +23,9 @@ public class IndexManagerController {
 
     /**
      * 页面请求的url:/index/import
-     * 返回值类型：TaotaoResult
-     * 参数列表：空
+     * @return TaotaoResult
+     * @throws IOException
+     * @throws SolrServerException
      */
     @RequestMapping(value = "/index/import")
     @ResponseBody

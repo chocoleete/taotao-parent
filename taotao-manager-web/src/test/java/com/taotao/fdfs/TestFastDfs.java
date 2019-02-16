@@ -14,18 +14,18 @@ import java.io.IOException;
 public class TestFastDfs {
     @Test
     public void testUpload() throws IOException, MyException {
-        //1.创建一个配置文件fast_dfs.conf,配置文件的内容就是指定TrackerService的地址
-        //2.加载配置文件
+        // 1.创建一个配置文件fast_dfs.conf,配置文件的内容就是指定TrackerService的地址
+        // 2.加载配置文件
         ClientGlobal.init("F:\\inteliJ_dir\\taotao-manager-web\\src\\main\\resources\\resource\\fast_dfs.conf");
-        //3.创建一个trackerClent对象
+        // 3.创建一个trackerClent对象
         TrackerClient trackerClient = new TrackerClient();
-        //4.通过trackerClent对象获得trackerService对象
+        // 4.通过trackerClent对象获得trackerService对象
         TrackerServer trackerServer = trackerClient.getConnection();
-        //5.创建一个storagerService的引用。null就可以
+        // 5.创建一个storagerService的引用。null就可以
         StorageServer storageServer = null;
-        //6.创建一个storagerClent对象、两个参数 trackerService,storageService
+        // 6.创建一个storagerClent对象、两个参数 trackerService,storageService
         StorageClient storageClient = new StorageClient(trackerServer, storageServer);
-        /*7.使用storageClient对象上传文件
+        /* 7.使用storageClient对象上传文件
         * 参数一是文件名，参数二是扩展名不包含“.”，参数三：文件元数据*/
         String[] strings = storageClient.upload_file("G:\\Repositories\\haibao.png", "png", null);
         for (String string : strings) {

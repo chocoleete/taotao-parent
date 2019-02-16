@@ -16,11 +16,11 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
 
     @Override
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
-        //写日志文件
+        // 写日志文件
         logger.error("运行时异常",ex);
-        //发短信，发邮件
-        //发短信：第三方运营商的服务。发邮件使用jmail包。
-        //跳转到错误页面
+        // 发短信，发邮件
+        // 发短信：第三方运营商的服务。发邮件使用jmail包。
+        // 跳转到错误页面
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("error/exception");
         modelAndView.addObject("message", "您的网络异常，请稍候再试...");

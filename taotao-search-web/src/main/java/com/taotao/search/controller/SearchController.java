@@ -26,17 +26,27 @@ public class SearchController {
     @Value(value = "${ITEM_ROWS}")
     private Integer ITEM_ROWS;
 
+    /**
+     * 商品搜索
+     *
+     * @param queryString
+     * @param page
+     * @param model
+     * @return String
+     * @throws SolrServerException
+     * @throws UnsupportedEncodingException
+     */
     @RequestMapping(value = "/search")
-    public String searchItem(@RequestParam(value = "q") String queryString, @RequestParam(defaultValue = "1") Integer page,Model model) throws SolrServerException, UnsupportedEncodingException {
+    public String searchItem(@RequestParam(value = "q") String queryString, @RequestParam(defaultValue = "1") Integer page, Model model) throws SolrServerException, UnsupportedEncodingException {
         queryString = new String(queryString.getBytes("iso8859-1"), "utf-8");
-        //调用服务搜索商品信息
+        // 调用服务搜索商品信息
         SearchResult searchResult = searchService.search(queryString, page, ITEM_ROWS);
-        //使用model向页面传递参数
+        // 使用model向页面传递参数
         model.addAttribute("query", queryString);
         model.addAttribute("totalPages", searchResult.getPageCount());
         model.addAttribute("itemList", searchResult.getItemList());
         model.addAttribute("page", page);
-        //返回逻辑视图
+        // 返回逻辑视图
         return "search";
     }
 }

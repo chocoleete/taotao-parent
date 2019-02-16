@@ -14,7 +14,7 @@ public class ActiveMQTest {
     //消费者
     @Test
     public void testQueueConsumer() throws IOException {
-        //初始化spring容器
+        // 初始化spring容器
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:/spring/applicationContext-activeMQ.xml");
         //System.in.read();
     }

@@ -47,8 +47,8 @@
                 </bean>
             </set>
         </constructor-arg>
-    </bean>
-    &lt;!&ndash;jedisClientCluster对象&ndash;&gt;
-    <bean id="jedisClientCluster" class="com.taotao.content.jedis.JedisClientCluster"/>-->
+    </bean>-->
+    <!--jedisClientCluster对象-->
+    <!--<bean id="jedisClientCluster" class="com.taotao.content.jedis.JedisClientCluster"/>-->
 
 </beans>

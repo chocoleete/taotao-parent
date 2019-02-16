@@ -24,12 +24,13 @@ public class ItemController {
     /**
      * 页面请求url:/item/{itemId}
      * 参数列表:Long itemId,Model model
+     *
      * @param itemId
      * @param model
      * @return
      */
     @RequestMapping(value = "/item/{itemId}")
-    public String showItemInfo(@PathVariable Long itemId,Model model) {
+    public String showItemInfo(@PathVariable(value = "itemId") Long itemId, Model model) {
         //根据商品Id查询商品基本信息
         TbItem tbItem = itemService.getItemById(itemId);
         //使用tbItem初始化item对象
