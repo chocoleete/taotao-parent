@@ -9,6 +9,7 @@ import com.taotao.commom.pojo.TaotaoResult;
 public interface UserLoginService {
     /**
      * 用户登录
+     *
      * @param username
      * @param password
      * @return TaotaoResult
@@ -17,6 +18,7 @@ public interface UserLoginService {
 
     /**
      * 根据token查询用户
+     *
      * @param token
      * @return TaotaoResult
      */

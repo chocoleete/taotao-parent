@@ -10,14 +10,16 @@ import com.taotao.pojo.TbUser;
 public interface UserRegisterService {
     /**
      * 用户数据校验
+     *
      * @param parm
      * @param type
      * @return TaotaoResult
      */
-    TaotaoResult checkUserInfo(String parm,Integer type);
+    TaotaoResult checkUserInfo(String parm, Integer type);
 
     /**
      * 用户注册
+     *
      * @param user
      * @return TaotaoResult
      */

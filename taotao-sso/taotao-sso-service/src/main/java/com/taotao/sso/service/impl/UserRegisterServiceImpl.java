@@ -20,15 +20,22 @@ import java.util.List;
 @SuppressWarnings(value = "all")
 @Service(value = "userRegisterServiceImpl")
 public class UserRegisterServiceImpl implements UserRegisterService {
-    //注入userMapper
+    // 注入userMapper
     @Autowired
     private TbUserMapper userMapper;
 
+    /**
+     * 校验数据
+     *
+     * @param parm
+     * @param type
+     * @return
+     */
     @Override
     public TaotaoResult checkUserInfo(String parm, Integer type) {
         TbUserExample example = new TbUserExample();
         TbUserExample.Criteria criteria = example.createCriteria();
-        //判断要校验的数据类型,1/2/3分别代表username/phone/email
+        // 判断要校验的数据类型,1/2/3分别代表username/phone/email
         if (type == 1) {
             criteria.andUsernameEqualTo(parm);
         } else if (type == 2) {
@@ -38,18 +45,24 @@ public class UserRegisterServiceImpl implements UserRegisterService {
         } else {
             return TaotaoResult.build(400, "非法的参数");
         }
-        //执行查询
+        // 执行查询
         List<TbUser> list = userMapper.selectByExample(example);
-        //判断list,如果数据库中没有值，或者list为null，则表示该数据没有被占用
+        // 判断list,如果数据库中没有值，或者list为null，则表示该数据没有被占用
         if (list == null || list.size() == 0) {
             return TaotaoResult.ok(true);
         }
         return TaotaoResult.ok(false);
     }
 
+    /**
+     * 用户注册
+     *
+     * @param user
+     * @return
+     */
     @Override
     public TaotaoResult createUser(TbUser user) {
-        //使用TbUser接收提交的申请
+        // 使用TbUser接收提交的申请
         String username = user.getUsername();
         String password = user.getPassword();
         String phone = user.getPhone();
@@ -60,7 +73,7 @@ public class UserRegisterServiceImpl implements UserRegisterService {
         if (StringUtils.isBlank(password)) {
             return TaotaoResult.build(400, "密码不能为空");
         }
-        //校验数据是否可用
+        // 校验数据是否可用
         TaotaoResult result = checkUserInfo(username, 1);
         boolean flag = (boolean) result.getData();
         if (!flag) {
@@ -78,16 +91,16 @@ public class UserRegisterServiceImpl implements UserRegisterService {
                 return TaotaoResult.build(400, "此邮箱已经被注册");
             }
         }
-        //补全TbUser其他属性
+        // 补全TbUser其他属性
         Date date = new Date();
         user.setCreated(date);
         user.setUpdated(date);
-        //给密码加密
+        // 给密码加密
         String md5password = DigestUtils.md5DigestAsHex(password.getBytes());
         user.setPassword(md5password);
-        //将用户信息插入数据库
+        // 将用户信息插入数据库
         userMapper.insert(user);
-        //返回
+        // 返回
         return TaotaoResult.ok();
     }
 }
