@@ -37,36 +37,46 @@ public class CartController {
     @Resource(name = "itemService")
     private ItemService itemService;
 
+    /**
+     * 添加商品到购物车
+     *
+     * @param itemId   商品ID
+     * @param num      商品数量
+     * @param request  请求
+     * @param response 响应
+     * @return 页面
+     */
     @RequestMapping(value = "/cart/add/{itemId}")
-    public String addCart(@PathVariable(value = "itemId") Long itemId, Integer num, HttpServletRequest request, HttpServletResponse response) {
-        //从cookie中查询购物车列表
+    public String addCart(@PathVariable(value = "itemId") Long itemId, Integer num,
+                          HttpServletRequest request, HttpServletResponse response) {
+        // 从cookie中查询购物车列表
         List<TbItem> cartList = getCartList(request);
-        //判断列表中是否有此商品
+        // 判断列表中是否有此商品
         boolean hasItem = false;
         for (TbItem tbItem : cartList) {
             if (tbItem.getId() == itemId.longValue()) {
-                //列表中存在此商品，数量相加
+                // 列表中存在此商品，数量相加
                 tbItem.setNum(tbItem.getNum() + num);
                 hasItem = true;
                 break;
             }
         }
         if (!hasItem) {
-            //如果没有，根据商品ID查询商品信息，调用商品服务实现
+            // 如果没有，根据商品ID查询商品信息，调用商品服务实现
             TbItem tbItem = itemService.getItemById(itemId);
-            //设置商品数量
+            // 设置商品数量
             tbItem.setNum(num);
-            //取一张图片
+            // 取一张图片
             String image = tbItem.getImage();
             if (StringUtils.isNotBlank(image)) {
                 tbItem.setImage(image.split(",")[0]);
             }
-            //添加到商品列表
+            // 添加到商品列表
             cartList.add(tbItem);
         }
-        //把购物车写入cookie
+        // 把购物车写入cookie
         CookieUtils.setCookie(request, response, COOKIE_CART_KEY, JsonUtils.objectToJson(cartList), COOKIE_CART_EXPIRE, true);
-        //返回添加成功页面
+        // 返回添加成功页面
         return "cartSuccess";
     }
 
@@ -91,6 +101,7 @@ public class CartController {
     /**
      * 展示购物车商品列表
      * 页面请求url:/cart/cart
+     *
      * @param request
      * @param model
      * @return String
@@ -107,32 +118,44 @@ public class CartController {
     /**
      * 修改购物车商品数量
      * 页面请示url:/cart/update/num/{itemId}/{num}
-     * @param itemId
-     * @param num
+     *
+     * @param itemId 商品ID
+     * @param num    数量
      * @return
      */
     @RequestMapping(value = "/cart/update/num/{itemId}/{num}")
     @ResponseBody
-    public TaotaoResult updateNum(@PathVariable(value = "itemId") Long itemId, @PathVariable(value = "num") Integer num,HttpServletRequest request,HttpServletResponse response) {
-        //1.接收页面传来的参数
-        //2.取购物车中的商品列表
+    public TaotaoResult updateNum(@PathVariable(value = "itemId") Long itemId,
+                                  @PathVariable(value = "num") Integer num,
+                                  HttpServletRequest request, HttpServletResponse response) {
+        // 1.接收页面传来的参数
+        // 2.取购物车中的商品列表
         List<TbItem> cartList = getCartList(request);
-        //3.遍历商品列表，找到对应的商品
+        // 3.遍历商品列表，找到对应的商品
         for (TbItem tbItem : cartList) {
             if (tbItem.getId() == itemId.longValue()) {
-                //4.将数据设置成页面传来的值
+                // 4.将数据设置成页面传来的值
                 tbItem.setNum(num);
                 break;
             }
         }
-        //5.将商品列表写入cookie
+        // 5.将商品列表写入cookie
         CookieUtils.setCookie(request, response, COOKIE_CART_KEY, JsonUtils.objectToJson(cartList), COOKIE_CART_EXPIRE, true);
-        //6.响应TaotaoResult Json数据
+        // 6.响应TaotaoResult Json数据
         return TaotaoResult.ok();
     }
 
+    /**
+     * 删除购物车中的商品
+     *
+     * @param itemId   商品ID
+     * @param request  请求
+     * @param response 响应
+     * @return
+     */
     @RequestMapping(value = "/cart/delete/{itemId}")
-    public String deleteCartItem(@PathVariable(value = "itemId") Long itemId, HttpServletRequest request, HttpServletResponse response) {
+    public String deleteCartItem(@PathVariable(value = "itemId") Long itemId,
+                                 HttpServletRequest request, HttpServletResponse response) {
         //获取从页面传来的商品id
         //从cookie中取购物车商品列表
         List<TbItem> cartList = getCartList(request);

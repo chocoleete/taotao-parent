@@ -125,8 +125,8 @@ public class UserController {
 		TaotaoResult result = userLoginService.getUserByToken(token);
 		if (StringUtils.isNotBlank(callback)) {
 			//客户端为jsonp请求。需要返回js代码
-			String jsonResutl = callback + "(" + JsonUtils.objectToJson(result) + ");";
-			return jsonResutl;
+			String jsonResult = callback + "(" + JsonUtils.objectToJson(result) + ");";
+			return jsonResult;
 		}
 		return JsonUtils.objectToJson(result);
 	}*/
