@@ -52,37 +52,41 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public TaotaoResult createOrder(OrderInfo orderInfo) {
-        //生成订单号 使用redis的incr生成,判断订单号是否存在
+        // 生成订单号 使用redis的incr生成,判断订单号是否存在
         if (!jedisClient.exists(ORDER_GEN_KEY)) {
-            //如果不存在，设置初始值
+            // 如果不存在，设置初始值
             jedisClient.set(ORDER_GEN_KEY, ORDER_ID_INIT);
         }
         String orderId = jedisClient.incr(ORDER_GEN_KEY).toString();
-        //向订单表插入数据
+        // 向订单表插入数据订单号
         orderInfo.setOrderId(orderId);
+        // 邮费
         orderInfo.setPostFee("0");
-        orderInfo.setStatus(1);//状态：1、未付款，2、已付款，3、未发货，4、已发货、5、交易成功，6、交易关闭
+        // 状态：1、未付款，2、已付款，3、未发货，4、已发货、5、交易成功，6、交易关闭
+        orderInfo.setStatus(1);
         Date date = new Date();
+        // 创建时间
         orderInfo.setCreateTime(date);
+        // 更新时间
         orderInfo.setUpdateTime(date);
         orderMapper.insert(orderInfo);
-        //向订单明细插入数据
+        // 向订单明细插入数据
         List<TbOrderItem> orderItems = orderInfo.getOrderItems();
         for (TbOrderItem orderItem : orderItems) {
-            //生成明细的主键
+            // 生成明细的主键
             Long orderDetailId = jedisClient.incr(ORDER_DETAIL_GEN_KEY);
             orderItem.setId(orderDetailId.toString());
-            //设置订单id
+            // 设置订单id
             orderItem.setOrderId(orderId);
             orderItemMapper.insert(orderItem);
         }
-        //向物流信息插入数据
+        // 向物流信息插入数据
         TbOrderShipping orderShipping = orderInfo.getOrderShipping();
         orderShipping.setOrderId(orderId);
         orderShipping.setCreated(date);
         orderShipping.setUpdated(date);
         orderShippingMapper.insert(orderShipping);
-        //返回订单号
+        // 返回订单号
         return TaotaoResult.ok(orderId);
     }
 }

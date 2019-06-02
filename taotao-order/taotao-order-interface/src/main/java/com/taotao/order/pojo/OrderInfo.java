@@ -12,9 +12,9 @@ import java.util.List;
  */
 @SuppressWarnings(value = "all")
 public class OrderInfo extends TbOrder implements Serializable {
-    //商品列表
+    // 商品列表
     private List<TbOrderItem> orderItems;
-    //收货地址
+    // 收货地址
     private TbOrderShipping orderShipping;
 
     public List<TbOrderItem> getOrderItems() {

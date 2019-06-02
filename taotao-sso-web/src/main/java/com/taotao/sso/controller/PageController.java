@@ -14,7 +14,7 @@ public class PageController {
     /**
      * 显示注册页面
      *
-     * @return
+     * @return 注册页面
      */
     @RequestMapping(value = "/page/register")
     public String showRegister() {
@@ -26,11 +26,11 @@ public class PageController {
      *
      * @param redirect
      * @param model
-     * @return
+     * @return 登录页面
      */
     @RequestMapping(value = "/page/login")
     public String showLogin(String redirect, Model model) {
-        //将redirect传递到页面
+        // 将redirect传递到页面
         model.addAttribute("redirect", redirect);
         return "login";
     }

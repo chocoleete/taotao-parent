@@ -9,6 +9,7 @@ import com.taotao.pojo.TbItem;
 public class Item extends TbItem {
     /**
      * 得到图片
+     *
      * @return
      */
     public String[] getImages() {

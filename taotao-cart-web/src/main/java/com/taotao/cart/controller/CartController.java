@@ -75,7 +75,8 @@ public class CartController {
             cartList.add(tbItem);
         }
         // 把购物车写入cookie
-        CookieUtils.setCookie(request, response, COOKIE_CART_KEY, JsonUtils.objectToJson(cartList), COOKIE_CART_EXPIRE, true);
+        CookieUtils.setCookie(request, response, COOKIE_CART_KEY,
+                JsonUtils.objectToJson(cartList), COOKIE_CART_EXPIRE, true);
         // 返回添加成功页面
         return "cartSuccess";
     }
@@ -86,14 +87,14 @@ public class CartController {
      * @return List<TbItem>
      */
     private List<TbItem> getCartList(HttpServletRequest request) {
-        //使用CookieUtils取购物车列表
+        // 使用CookieUtils取购物车列表
         String json = CookieUtils.getCookieValue(request, COOKIE_CART_KEY, true);
-        //判断cookie中是否有值
+        // 判断cookie中是否有值
         if (StringUtils.isBlank(json)) {
-            //没有值返回一个空list
+            // 没有值返回一个空list
             return new ArrayList<>();
         }
-        //将json转换成list对象
+        // 将json转换成list对象
         List<TbItem> tbItems = JsonUtils.jsonToList(json, TbItem.class);
         return tbItems;
     }
@@ -140,7 +141,8 @@ public class CartController {
             }
         }
         // 5.将商品列表写入cookie
-        CookieUtils.setCookie(request, response, COOKIE_CART_KEY, JsonUtils.objectToJson(cartList), COOKIE_CART_EXPIRE, true);
+        CookieUtils.setCookie(request, response, COOKIE_CART_KEY,
+                JsonUtils.objectToJson(cartList), COOKIE_CART_EXPIRE, true);
         // 6.响应TaotaoResult Json数据
         return TaotaoResult.ok();
     }
@@ -168,7 +170,8 @@ public class CartController {
             }
         }
         //将商品列表写入cookie
-        CookieUtils.setCookie(request, response, COOKIE_CART_KEY, JsonUtils.objectToJson(cartList), COOKIE_CART_EXPIRE, true);
+        CookieUtils.setCookie(request, response, COOKIE_CART_KEY,
+                JsonUtils.objectToJson(cartList), COOKIE_CART_EXPIRE, true);
         //返回逻辑视图，在逻辑视图中做redirect跳转
         return "redirect:/cart/cart.html";
     }
